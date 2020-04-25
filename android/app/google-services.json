@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "255559657265",
+    "firebase_url": "https://are-you-present-faculty.firebaseio.com",
+    "project_id": "are-you-present-faculty",
+    "storage_bucket": "are-you-present-faculty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255559657265:android:2a12afc2ac557ea036b210",
+        "android_client_info": {
+          "package_name": "com.example.are_you_present"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255559657265-9t2g9b6d9j5ugkrf49m4t41cl41hgg6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnMg3HTTjC8jQCfg9Wqv76QJ-Q17v6eIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255559657265-9t2g9b6d9j5ugkrf49m4t41cl41hgg6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
