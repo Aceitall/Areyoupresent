@@ -1,23 +1,24 @@
+import 'package:are_you_present/studenthome.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import './studenthome.dart';
+import './facultyhome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class StudentLogin extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _StudentLoginState createState() => _StudentLoginState();
+  _LoginState createState() => _LoginState();
 }
 
-class _StudentLoginState extends State<StudentLogin> {
+class _LoginState extends State<Login> {
   String _username, _password, passcode, type;
   final db = Firestore.instance;
-  final GlobalKey<FormState> _studentLoginKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Form(
-            key: _studentLoginKey,
+            key: _loginKey,
             child: SingleChildScrollView(
                 child: Stack(
               children: <Widget>[
@@ -89,7 +90,7 @@ class _StudentLoginState extends State<StudentLogin> {
                         buttonColor: Color(0xff322F02),
                         child: RaisedButton(
                           onPressed: () {
-                            studentLogin();
+                            login();
                           },
                           child: Text(
                             'Login',
@@ -105,28 +106,37 @@ class _StudentLoginState extends State<StudentLogin> {
             ))));
   }
 
-  Future<void> studentLogin() async {
-    final formState = _studentLoginKey.currentState;
+  Future<void> login() async {
+    final formState = _loginKey.currentState;
     if (formState.validate()) {
       formState.save();
-
       try {
         DocumentSnapshot snapshot =
             await db.collection('Users').document(_username).get();
         passcode = snapshot.data['Password'];
         type = snapshot.data['Type'];
-        String tp = "Student";
-        if (passcode == _password && type == tp) {
+        String ft = "Faculty";
+        String st = "Student";
+        if (passcode == _password) {
+          if(type == st){
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => StudentHome()));
-        } else if (passcode != _password) {
-          print("Incorrect password");
+          }
+          else if(type == ft){
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FacultyHome()));
+          }
+          else{
+            print("Incorrect type");
+          }
         } else {
-          print("Incorrect User type");
+          print("Incorrect password");
         }
-      }catch (e) {
+      } catch (e) {
         print(e.message);
       }
+    } else {
+      print("Not validated");
     }
   }
 }
