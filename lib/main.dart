@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               fit: BoxFit.cover,),
               Positioned(top: 50,left: 50,
               child:
-              Text('Are You Present', style: TextStyle(fontFamily: 'Sedan SC', fontSize: 40, color: Color(0xff322F02), fontWeight: FontWeight.bold),),
+              Text('Are You Present?', style: TextStyle(fontFamily: 'Sedan SC', fontSize: 40, color: Color(0xff322F02), fontWeight: FontWeight.bold),),
               ),
               Builder(builder: 
                 (context) => Positioned(

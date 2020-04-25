@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import './facultyhome.dart';
 
@@ -10,7 +9,7 @@ class FacultyLogin extends StatefulWidget {
 
 class _FacultyLoginState extends State<FacultyLogin> {
 
-  String _email, _password;
+  String _username, _password;
   final GlobalKey<FormState> _facultyLoginKey = GlobalKey<FormState>();
    
 
@@ -42,14 +41,13 @@ class _FacultyLoginState extends State<FacultyLogin> {
                   TextFormField(
                   validator: (input){
                   if(input.isEmpty){
-                    return 'Enter a valid E-mail';
+                    return 'This field cannot be left empty';
                     }
-                    return '';
                   },
-                  onSaved: (input) => _email = input,
+                  onSaved: (input) => _username = input,
                   style: TextStyle(color: Color(0xff322F02), fontSize: 25),
                   decoration: InputDecoration(
-                    labelText: 'E-mail',
+                    labelText: 'Username',
                     labelStyle: TextStyle(color: Colors.white),
                     focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -64,11 +62,10 @@ class _FacultyLoginState extends State<FacultyLogin> {
                   TextFormField(
                     validator: (input){
                       if(input.isEmpty){
-                        return 'Enter a valid Password';
-                      }else if(input.length < 6){
-                        return 'Password Short. Enter a valid Password';
+                        return 'This field cannot be left empty';
+                      }else if(input.length < 8){
+                        return 'Password too short. Please enter a valid Password';
                       }
-                      return '';
                     },
                     onSaved: (input) => _password = input,
                     style: TextStyle(color: Color(0xff322F02), fontSize: 25),
@@ -113,7 +110,7 @@ Future <void> facultyLogin() async {
   if(formState.validate()){
     formState.save();
     try{
-      AuthResult user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email.trim(), password: _password);
+      print("Faculty Login");
       Navigator.push(context,
                       MaterialPageRoute(builder: (context) => FacultyHome()));
     }catch(e){
@@ -122,5 +119,3 @@ Future <void> facultyLogin() async {
   }   
 }
 }
-
-
