@@ -1,8 +1,8 @@
-import 'package:are_you_present/studenthome.dart';
-import 'package:flutter/material.dart';
-import 'dart:async';
+import './studenthome.dart';
 import './facultyhome.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
 class Login extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
                 child: Stack(
               children: <Widget>[
                 Image.asset(
-                  'assets/studentLogin.png',
+                  'assets/facultyLogin.png',
                   height: 800,
                   width: 600,
                   fit: BoxFit.cover,
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                         buttonColor: Color(0xff322F02),
                         child: RaisedButton(
                           onPressed: () {
-                            login();
+                            Login();
                           },
                           child: Text(
                             'Login',
@@ -106,7 +106,7 @@ class _LoginState extends State<Login> {
             ))));
   }
 
-  Future<void> login() async {
+  Future<void> Login() async {
     final formState = _loginKey.currentState;
     if (formState.validate()) {
       formState.save();
