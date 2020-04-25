@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                         buttonColor: Color(0xff322F02),
                         child: RaisedButton(
                           onPressed: () {
-                            Login();
+                            login();
                           },
                           child: Text(
                             'Login',
@@ -106,13 +106,12 @@ class _LoginState extends State<Login> {
             ))));
   }
 
-  Future<void> Login() async {
+  Future<void> login() async {
     final formState = _loginKey.currentState;
     if (formState.validate()) {
       formState.save();
       try {
-        DocumentSnapshot snapshot =
-            await db.collection('Users').document(_username).get();
+        DocumentSnapshot snapshot = await db.collection('Users').document(_username).get();
         passcode = snapshot.data['Password'];
         type = snapshot.data['Type'];
         String ft = "Faculty";
@@ -124,7 +123,7 @@ class _LoginState extends State<Login> {
           }
           else if(type == ft){
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => FacultyHome()));
+              context, MaterialPageRoute(builder: (context) => FacultyHome(_username)));
           }
           else{
             print("Incorrect type");
@@ -133,7 +132,7 @@ class _LoginState extends State<Login> {
           print("Incorrect password");
         }
       } catch (e) {
-        print(e.message);
+        print(e);
       }
     } else {
       print("Not validated");

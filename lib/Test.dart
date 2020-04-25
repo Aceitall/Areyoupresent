@@ -1,18 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-class FacultyHome extends StatefulWidget {
-  final String _username;
-  FacultyHome(this._username);
+class Test extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _FacultyHomeState(this._username);
-  }
+  _TestState createState() => _TestState();
 }
 
-class _FacultyHomeState extends State<FacultyHome> {
-  String _username, _subjectname;
-  _FacultyHomeState(this._username);
+class _TestState extends State<Test> {
+  String _subjectname;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +27,7 @@ class _FacultyHomeState extends State<FacultyHome> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: Firestore.instance
                       .collection("Users")
-                      .document(_username)
+                      .document("Aceitincs")
                       .collection("Subjects")
                       .snapshots(),
                   builder: (context, snapshot) {
@@ -59,6 +54,7 @@ class _FacultyHomeState extends State<FacultyHome> {
                       return DropdownButton(
                         items: subjects,
                         onChanged: (subjectName) {
+                          print(subjectName);
                           setState(() {
                             _subjectname = subjectName;
                           });
