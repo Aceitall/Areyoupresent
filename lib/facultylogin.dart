@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import './facultyhome.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FacultyLogin extends StatefulWidget {
   @override
@@ -12,7 +13,6 @@ class _FacultyLoginState extends State<FacultyLogin> {
   String _username, _password;
   final GlobalKey<FormState> _facultyLoginKey = GlobalKey<FormState>();
    
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,12 +110,13 @@ Future <void> facultyLogin() async {
   if(formState.validate()){
     formState.save();
     try{
-      print("Faculty Login");
-      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FacultyHome()));
+      print("Username - "+_username+" and Password - "+_password);
     }catch(e){
       print(e.message);
     }
+  }
+  else{
+    print("Not validated");
   }   
 }
 }

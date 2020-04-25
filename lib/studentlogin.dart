@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import './studenthome.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StudentLogin extends StatefulWidget {
   @override
@@ -112,7 +113,6 @@ Future <void> studentLogin() async {
   if(formState.validate()){
     formState.save();
     try{
-      print("Student login");
       Navigator.push(context,
                       MaterialPageRoute(builder: (context) => StudentHome()));
     }catch(e){
