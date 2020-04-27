@@ -1,5 +1,7 @@
+import './Test.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class FacultyHome extends StatefulWidget {
   final String _username;
@@ -116,7 +118,35 @@ class _FacultyHomeState extends State<FacultyHome> {
         ])));
   }
 
-  void attendance() {
-    print(_subjectname);
+  void attendance() async {
+    final db = Firestore.instance;
+    String _class, _lecturename;
+    int _lectureno;
+    if (_subjectname != null) {
+      DocumentSnapshot snapshot = await db
+          .collection('Users')
+          .document(_username)
+          .collection('Subjects')
+          .document(_subjectname)
+          .get();
+      _class = snapshot.data['Class'];
+      snapshot = await db.collection('Attendance').document(_subjectname).get();
+      _lectureno = snapshot.data['NoofLectures'];
+      _lectureno++;
+      db
+          .collection('Attendance')
+          .document(_subjectname)
+          .updateData({'NoofLectures': _lectureno});
+      _lecturename = 'Lecture ' + _lectureno.toString();
+      db
+          .collection('Attendance')
+          .document(_subjectname)
+          .collection('Lectures')
+          .document(_lecturename)
+          .setData(
+              {'Date': new DateFormat("dd-MM-yyyy").format(DateTime.now())});
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Test(_username, _subjectname, _lecturename, _lectureno, _class)));
+    }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class StudentHome extends StatefulWidget {
@@ -6,6 +7,8 @@ class StudentHome extends StatefulWidget {
 }
 
 class _StudentHomeState extends State<StudentHome> {
+  int lectureno;
+  final db = Firestore.instance;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +34,8 @@ class _StudentHomeState extends State<StudentHome> {
                         fontFamily: 'Sedan SC',
                         fontSize: 25),
                   ),
-                  onPressed: () {},
+                  onPressed: (){
+                  },
                 ))),
         Positioned(
             top: 600,
